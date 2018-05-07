@@ -28,14 +28,15 @@
                   
                             {!! Form::label('telefone', 'Telefone')!!}
                             {!! Form::input('number', 'telefone', null, ['maxlength'=>'12', 'class'=>'form-control','placeholder'=>'(XX)XXXXX-XXXX']) !!}
-
+                            
+                            @can('isAdmin')
                             {!! Form::label('cargo', 'Cargo')!!}
-
-                            <select class="custom-select" name="select_role">
-                                @foreach($roles as $role)
-                                    <option value="{{ $role->id }}" id="{{$role->name}}">{{ $role->name}}</option>
-                                @endforeach
-                            </select>             
+                                <select class="custom-select" name="select_role">
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->id }}" id="{{$role->name}}">{{ $role->name}}</option>
+                                    @endforeach
+                                </select>             
+                            @endcan
 
                             {!! Form::label('dt_nascto', 'Data de Nascimento')!!}
                             {!! Form::input('date', 'dt_nascto', null, ['class'=>'form-control','placeholder'=>'DD\MM\AAAA']) !!}                                                     
