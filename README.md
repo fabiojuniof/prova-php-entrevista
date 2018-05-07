@@ -19,7 +19,7 @@ _Normalmente localhost:8000_
   Obs.: Caso ocorra erro **No Application Key Has Been Specified**,execute o comando no prompt:
     >`php artisan key:generate`
 
-## SOBRE OS USUÁRIOS E ROLES:
+## SOBRE OS USUÁRIOS:
 - Há 4 roles possíveis:
   1. **Administrator**: Tem permissão para visualizar, cadastrar, editar e excluir qualquer cadastro.
   2. **Editor**: Tem permissão para visualizar e editar qualquer cadastro (exceto cargos).
@@ -34,3 +34,52 @@ Carlos      |Administrator|carlos@email.com   |123456
 Edgar       |Editor       |edgar@email.com    |123456
 Luana       |Moderator    |luana@email.com    |123456
 Bruno       |User         |bruno@email.com    |123456
+  
+## CONFIGURAÇÕES DE ROLES:
+
+Para utilização de roles, foram adicionadas algumas informações no arquivo:
+> App > Http > Providers > AuthServiceProvider.php
+
+- No Cabeçalho foi informado um alias para o Gate:  
+`use Illuminate\Support\Facades\Gate as GateContract;`
+
+- Foi feita também alteração na **function boot** definindo os roles:
+```
+public function boot (GateContract $gate)
+    {
+        $this->registerPolicies($gate);
+
+        $gate::define('isAdmin', function($user){
+            return $user->cargo == 'Administrator';
+        });
+        
+        $gate::define('isEditor', function($user){
+            return $user->cargo == 'Editor';
+        });
+
+        $gate::define('isModerator', function($user){
+            return $user->cargo == 'Moderator';
+        });
+        
+        $gate::define('isUser', function($user){
+            return $user->cargo == 'User';
+        });
+    }
+```
+- Nas Views, foi utilizado o facade _@can()_ e _@endcan_ para determinar o que cada role pode visualizar:
+```
+<td class="align-middle">
+  @can('isAdmin')
+    <a class="btn btn-warning btn-sm"  href="/users/{{$user->id}}/editar">Editar</a>
+    <a class="btn btn-danger btn-sm"   href="/users/{{$user->id}}/excluir">Excluir</a>
+  @endcan
+  
+  @can('isModerator')
+    <a class="btn btn-warning btn-sm"  href="/users/{{$user->id}}/editar">Editar</a>
+  @endcan
+
+  @can('isEditor')
+    <a class="btn btn-warning btn-sm"  href="/users/{{$user->id}}/editar">Editar</a>
+  @endcan
+</td>
+```
