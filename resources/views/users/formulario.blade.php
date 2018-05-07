@@ -35,7 +35,14 @@
                                     @foreach($roles as $role)
                                         <option value="{{ $role->id }}" id="{{$role->name}}">{{ $role->name}}</option>
                                     @endforeach
-                                </select>             
+                                </select>
+                            @elsecan('isEditor')             
+                            {!! Form::label('cargo', 'Cargo')!!}
+                            <select class="custom-select" name="select_role">
+                                @foreach($roles as $role)
+                                    <option value="{{ $role->id }}" id="{{$role->name}}">{{ $role->name}}</option>
+                                @endforeach
+                            </select>
                             @endcan
 
                             {!! Form::label('dt_nascto', 'Data de Nascimento')!!}

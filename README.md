@@ -22,7 +22,7 @@ _Normalmente localhost:8000_
 ## SOBRE OS USUÁRIOS:
 - Há 4 roles possíveis:
   1. **Administrator**: Tem permissão para visualizar, cadastrar, editar e excluir qualquer cadastro.
-  2. **Editor**: Tem permissão para visualizar e editar qualquer cadastro (exceto cargos).
+  2. **Editor**: Tem permissão para visualizar e editar qualquer cadastro.
   3. **Moderator**: Tem permissão para visualizar e editar qualquer cadastro (exceto cargos).
   4. **User**: Tem permissão apenas para visualizar.
 
@@ -34,7 +34,9 @@ Carlos      |Administrator|carlos@email.com   |123456
 Edgar       |Editor       |edgar@email.com    |123456
 Luana       |Moderator    |luana@email.com    |123456
 Bruno       |User         |bruno@email.com    |123456
-  
+
+- Os usuários cadastrados através do endereço `localhost:8000/Register` são definidos com a role **Editor** por padrão.
+
 ## CONFIGURAÇÕES DE ROLES:
 
 Para utilização de roles, foram adicionadas algumas informações no arquivo:
