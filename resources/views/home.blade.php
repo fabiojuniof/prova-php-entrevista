@@ -14,7 +14,10 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <h4 class="text-center">Você está logado!</h4>
+                    <a href="/">
+                        <button type="button" class="btn btn-primary btn-lg btn-block">Listar Usuários</button>
+                    </a>
                 </div>
             </div>
         </div>

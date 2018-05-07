@@ -19,10 +19,10 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
 
-            $table->float('telefone',12)->nullable();
+            $table->string('telefone',20)->nullable();
             $table->string('dt_nascto')->nullable();
             $table->string('cargo')->nullable();
-            $table->float('salario',6,2)->nullable();
+            $table->float('salario',15,2)->nullable();
             $table->string('foto')->nullable();
             $table->rememberToken();
             $table->timestamps();
